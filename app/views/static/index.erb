@@ -1,15 +1,29 @@
 <h1>Hello World</h1>
 <p>See Me in views/static/index.html.erb</p>
 
+<% if @url %>
+  <div id="error_explanation">
+    
+ 
+    <ul>
+    <% @url.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <form action="/urls" method="post">
     Enter URL: 
     <input type ="text" name="long_url">
     <input type="submit" value="Submit">
  </form>
+ <p> <%= @msg if @msg %> </p>
 
  <p><% @urls.each do |url| %></p>
 
- 	<p>Long URL: <%= "#{url.long_url}" %>  
+ 	<p>Long URL: <%= url.long_url %>  
  	<p>Short URL: <%= "http://localhost:9393/#{url.short_url}" %>  
+ 	<p>Clicks: <%= url.click_count %>
 	<p><% end %></p>
 	<br>
